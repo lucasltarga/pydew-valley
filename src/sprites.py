@@ -11,6 +11,12 @@ class Generic(pygame.sprite.Sprite):
         self.z = z
         self.hitbox = self.rect.copy().inflate((-self.rect.width * 0.6, -self.rect.height * 0.8))
 
+class Interaction(Generic):
+    def __init__(self, pos, size, groups, name):
+        surface = pygame.Surface(size)
+        super().__init__(pos, surface, groups)
+        self.name = name
+
 class Water(Generic):
     def __init__(self, pos, frames, groups, z):
         #animation setup
