@@ -36,6 +36,24 @@ class Wildflower(Generic):
         super().__init__(pos, surface, groups)
         self.hitbox = self.rect.copy().inflate(-20,-self.rect.height * 0.9)
 
+class Particle(Generic):
+    def __init__(self, pos, surface, groups, z, duration = 200):
+        super().__init__(pos, surface, groups, z)
+        self.start_time = pygame.time.get_ticks()
+        self.duration = duration
+
+        #white surface
+        mask_surface = pygame.mask.from_surface(self.image)
+        new_surface = mask_surface.to_surface()
+        #if activate, apples do not show up
+        new_surface.set_colorkey(0)
+        self.image = new_surface
+
+    def update(self,dt):
+        current_time = pygame.time.get_ticks()
+        if current_time - self.start_time > self.duration:
+            self.kill()
+
 class Tree(Generic):
     def __init__(self, pos, surface, groups, name):
         super().__init__(pos, surface, groups)
@@ -56,8 +74,13 @@ class Tree(Generic):
     def damage(self):
         self.health -= 1
 
-        if len(self.apple_sprites.sprites()):
+        if len(self.apple_sprites.sprites()) > 0:
             random_apple = choice(self.apple_sprites.sprites())
+            Particle(
+                pos = random_apple.rect.topleft, 
+                surface = random_apple.image, 
+                groups = self.groups()[0],
+                z = LAYERS['fruit'])
             random_apple.kill()
 
     def check_death(self):
