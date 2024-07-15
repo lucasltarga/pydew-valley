@@ -30,6 +30,11 @@ APPLE_POS = {
     'Large': [(30,24), (60,65), (50,50), (16,40), (45,50), (42,70)]
 }
 
+GROW_SPEED = {
+    'corn': 1,
+    'tomato': 0.7
+}
+
 PLAYER_TOOL_OFFSET = {
     'left': Vector2(-50,40),
     'right': Vector2(50,40),

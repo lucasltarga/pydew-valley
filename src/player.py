@@ -146,7 +146,7 @@ class Player(pygame.sprite.Sprite):
         self.target_pos = self.rect.center + PLAYER_TOOL_OFFSET[self.status.split('_')[0]]
 
     def use_seed(self):
-        print(self.selected_seed)
+        self.soil_layer.plant_seed(self.target_pos, self.selected_seed)
 
     def get_status(self):
         #if the player is not moving, add _idle to the status
