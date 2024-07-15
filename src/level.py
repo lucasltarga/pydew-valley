@@ -52,12 +52,13 @@ class Level:
         
         #trees
         for obj in tmx_data.get_layer_by_name('Trees'):
-            #self.all_sprites must be the first in the groups list so sprites.py > create_fruit function works
+            #self.all_sprites must be passed as parameter so sprites.py > create_fruit function works
             Tree(pos = (obj.x, obj.y), 
                  surface = obj.image, 
                  groups = [self.all_sprites, self.collision_sprites, self.tree_sprites], 
                  name = obj.name,
-                 player_add = self.player_add)
+                 player_add = self.player_add,
+                 all_sprites = self.all_sprites)
 
         #wildflower
         for obj in tmx_data.get_layer_by_name('Decoration'):
@@ -79,7 +80,6 @@ class Level:
                     soil_layer = self.soil_layer)
             if obj.name == 'Bed':
                 Interaction((obj.x, obj.y), (obj.width, obj.height), self.interaction_sprites, obj.name)        
-        
         
         Generic(pos = (0,0), 
                 surface = pygame.image.load('../graphics/world/ground.png').convert_alpha(), 

@@ -51,7 +51,6 @@ class Particle(Generic):
         #white surface
         mask_surface = pygame.mask.from_surface(self.image)
         new_surface = mask_surface.to_surface()
-        #if activate, apples do not show up
         new_surface.set_colorkey(0)
         self.image = new_surface
 
@@ -61,7 +60,7 @@ class Particle(Generic):
             self.kill()
 
 class Tree(Generic):
-    def __init__(self, pos, surface, groups, name, player_add):
+    def __init__(self, pos, surface, groups, name, player_add, all_sprites):
         super().__init__(pos, surface, groups)
 
         #tree attributes
@@ -70,6 +69,8 @@ class Tree(Generic):
         stump_path = f'../graphics/stumps/{"small" if name == "Small" else "large"}.png'
         self.stump_surface = pygame.image.load(stump_path).convert_alpha()
         self.invul_timer = Timer(200)
+        
+        self.all_sprites = all_sprites
 
         #apples
         self.apple_surface = pygame.image.load('../graphics/fruit/apple.png')
@@ -87,7 +88,7 @@ class Tree(Generic):
             Particle(
                 pos = random_apple.rect.topleft, 
                 surface = random_apple.image, 
-                groups = self.groups()[0],
+                groups = self.all_sprites,
                 z = LAYERS['fruit'])
             self.player_add('apple')
             random_apple.kill()
@@ -112,5 +113,5 @@ class Tree(Generic):
                 y = pos[1] + self.rect.top
                 Generic(pos = (x, y), 
                         surface = self.apple_surface, 
-                        groups = [self.apple_sprites, self.groups()[0]],
+                        groups = [self.apple_sprites, self.all_sprites],
                         z = LAYERS['fruit']) #self.groups()[0] points to all_sprites group
