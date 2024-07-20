@@ -133,6 +133,7 @@ pyvenv.cfg
 Include/
 Lib/
 Scripts/
+.vscode
 
 # Spyder project settings
 .spyderproject
