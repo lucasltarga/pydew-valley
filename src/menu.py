@@ -68,7 +68,7 @@ class Menu:
             if keys[pygame.K_DOWN]:
                 self.index += 1
                 self.timer.activate()
-            if keys[pygame.K_SPACE]:
+            if keys[pygame.K_RETURN]:
                 self.timer.activate()
                 
                 #get item
@@ -81,7 +81,7 @@ class Menu:
                         self.player.money += SALE_PRICES[current_item]
                 else:
                     seed_price = PURCHASE_PRICES[current_item]
-                    if self.player.money >= seed_price > 0:
+                    if self.player.money >= seed_price:
                         self.player.seed_inventory[current_item] += 1
                         self.player.money -= PURCHASE_PRICES[current_item]
 
