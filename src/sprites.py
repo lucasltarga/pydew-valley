@@ -68,7 +68,6 @@ class Tree(Generic):
         self.alive = True
         stump_path = f'../graphics/stumps/{"small" if name == "Small" else "large"}.png'
         self.stump_surface = pygame.image.load(stump_path).convert_alpha()
-        self.invul_timer = Timer(200)
         
         self.all_sprites = all_sprites
 
