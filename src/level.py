@@ -28,7 +28,7 @@ class Level:
 
         #sky
         self.rain = Rain(self.all_sprites)
-        self.raining = randint(0,10) > 3
+        self.raining = randint(0,10) > 7
         self.soil_layer.raining = self.raining
         self.sky = Sky()
 
@@ -118,7 +118,7 @@ class Level:
         self.soil_layer.remove_water()
 
         #randomize the rain
-        self.raining = randint(0,10) > 3
+        self.raining = randint(0,10) > 7
         self.soil_layer.raining = self.raining
         if self.raining:
             self.soil_layer.water_all()
