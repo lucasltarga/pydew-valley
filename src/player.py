@@ -4,7 +4,7 @@ from support import *
 from timer import Timer
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, group, collision_sprites, tree_sprites, interaction_sprites, soil_layer):
+    def __init__(self, pos, group, collision_sprites, tree_sprites, interaction_sprites, soil_layer, toggle_shop):
         super().__init__(group)
         self.import_assets()
         self.status = 'down_idle'
@@ -62,6 +62,7 @@ class Player(pygame.sprite.Sprite):
         self.interaction_sprites = interaction_sprites
         self.sleep = False
         self.soil_layer = soil_layer
+        self.toggle_shop = toggle_shop
 
     def import_assets(self):
         self.animations = {'up': [], 'down': [], 'right': [], 'left': [],
@@ -134,7 +135,7 @@ class Player(pygame.sprite.Sprite):
                 collided_interaction_sprite = pygame.sprite.spritecollide(self, self.interaction_sprites, False)
                 if collided_interaction_sprite:
                     if collided_interaction_sprite[0].name == 'Trader':
-                        pass
+                        self.toggle_shop()
                     if collided_interaction_sprite[0].name == 'Bed':
                         self.status = 'left_idle'
                         self.sleep = True
